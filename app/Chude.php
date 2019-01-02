@@ -19,4 +19,9 @@ class Chude extends Model
     {
         return $this->hasMany('App\Baiviet', 'bv_ma', 'bv_ma');
     }
+    public function slbaiViet()
+    {
+        return $this->hasManyThrough('App\Baiviet','App\Chude', 'bv_ma', 'bv_ma','bv_ma');
+    }
+
 }

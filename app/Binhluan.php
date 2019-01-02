@@ -20,6 +20,6 @@ class Binhluan extends Model
         return $this->belongsTo('App\Nguoidoc', 'nd_ma','nd_ma');
     }
     public function nhanVien(){
-        return $this->belongsTo('App\Nhanvien', 'nv_duyet','nv_ma');
+        return $this->belongsTo('App\Nhanvien','nv_ma', 'nv_duyet');
     }
 }

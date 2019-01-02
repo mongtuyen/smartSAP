@@ -20,7 +20,7 @@ class Baiviet extends Model
         return $this->hasMany('App\Video', 'bv_ma','bv_ma');
     }
     public function tacGia(){
-        return $this->belongsTo('App\Nhanvien', 'nv_tacGia','nv_ma');
+        return $this->belongsTo('App\Nhanvien','nv_ma', 'nv_tacGia');
     }
     public function chuDe(){
         return $this->belongsTo('App\Chude', 'cd_ma','cd_ma');
