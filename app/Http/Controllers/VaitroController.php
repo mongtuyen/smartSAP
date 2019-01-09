@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Loai;
+use App\Vaitro;
 use DB;
 use Session;
+
+
+
 
 class VaitroController extends Controller
 {
@@ -16,10 +19,10 @@ class VaitroController extends Controller
      */
     public function index()
     {
-        $ds_loai = DB::table('vaitro')->get();
+        $ds_vaitro = DB::table('vaitro')->get();
         
         return view('vaitro.index')
-            ->with('danhsachvaitro', $ds_vaitro;
+            ->with('danhsachvaitro', $ds_vaitro);
     }
 
     /**
@@ -29,7 +32,7 @@ class VaitroController extends Controller
      */
     public function create()
     {
-        //
+        return view('vaitro.create');
     }
 
     /**
@@ -40,7 +43,13 @@ class VaitroController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         
+        $vaitro=new Vaitro();
+        $vaitro->vt_ma=$request->vt_ma;
+        $vaitro->vt_ten=$request->vt_ten;
+        $vaitro->save();
+        Session::flash('alert-info','Thêm thành công!');
+        return redirect()->route('danhsachvaitro.index');
     }
 
     /**
@@ -62,7 +71,8 @@ class VaitroController extends Controller
      */
     public function edit($id)
     {
-        //
+        $vaitro = Vaitro::where("vt_ma", $id)->first();
+        return view('vaitro.edit')->with('vaitro', $vaitro);
     }
 
     /**
@@ -74,7 +84,14 @@ class VaitroController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+
+        $vaitro = Vaitro::where("vt_ma", $id)->first();
+        $vaitro->vt_ten = $request->vt_ten;
+        $vaitro->save();
+
+        Session::flash('alert-info', 'Cập nhật thành công!');
+        return redirect()->route('danhsachvaitro.index');
     }
 
     /**
@@ -85,6 +102,10 @@ class VaitroController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $vaitro = Vaitro::where("vt_ma",  $id)->first();
+        $vaitro->delete();
+
+        Session::flash('alert-danger', 'Xoá dữ liệu thành công!');
+        return redirect()->route('danhsachvaitro.index');
     }
 }

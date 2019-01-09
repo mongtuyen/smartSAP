@@ -66,7 +66,7 @@ desired effect
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>H</b>P</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Harry</b>Potter</span>
+      <span class="logo-lg"><b>Thời Đại Mới</b></span>
     </a>
 
     <!-- Header Navbar -->
@@ -214,7 +214,8 @@ desired effect
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="{{route('home')}}" class="btn btn-default btn-flat">Đăng xuất</a>
+    
                 </div>
               </li>
             </ul>
@@ -260,12 +261,15 @@ desired effect
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">Information</li>
-
-        <li class="active"><a href="{{route('danhsachloai.index')}}"><span>Loại hoa<span></a></li>
+        <li class="active"><a href="{{route('danhsachvaitro.index')}}"><span>Vai trò<span></a></li>
         
+        <li class="active"><a href="{{route('danhsachlinhvuc.index')}}">Lĩnh vực</a></li>
         <li class="active"><a href="{{route('danhsachchude.index')}}">Chủ đề</a></li>
-        <li class="active"><a href="{{route('danhsachsanpham.index')}}">Sản phẩm</a></li>
-        <li class="active"><a href="{{route('danhsachquyen.index')}}">Quyền</a></li>
+        <li class="active"><a href="{{route('danhsachnhanvien.index')}}">Nhân viên</a></li>
+        <li class="active"><a href="{{route('danhsachslide.index')}}">Slide</a></li>
+        <li class="active"><a href="{{route('danhsachbaiviet.index')}}">Bài viết</a></li>
+
+        
 
         <!-- Optionally, you can add icons to the links -->
         <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Facebook</span></a></li>
@@ -292,8 +296,8 @@ desired effect
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Nhiệt tình - Chu đáo - Thân thiện
-        <small>Sunshine sẽ mang đến hạnh phúc cho mọi nhà</small>
+        Công ty báo chí Thời Đại Mới
+        <small>Mang đến hạnh phúc cho mọi nhà</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -311,7 +315,6 @@ desired effect
     @yield('main-content')
     </section>
     <!-- /.content -->
-    <!--<a href="{{route('danhsachloai.create')}}">Them loai</a>-->
   </div>
   <!-- /.content-wrapper -->
 

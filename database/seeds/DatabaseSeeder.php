@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         //$this->call(NhanvienTableSeeder::class);
         $this->call(LinhvucTableSeeder::class);
         $this->call(ChudeTableSeeder::class);
+  
     }
 }

@@ -45,6 +45,14 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+        /*'nhanvien' => [
+            'driver' => 'session',
+            'provider' => 'nhanviens',
+        ],
+        'nhanvien-api' => [
+            'driver' => 'token',
+            'provider' => 'nhanviens',
+        ],*/
     ],
 
     /*
@@ -69,7 +77,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
-
+        //'nhanviens' => [
+         //   'driver' => 'eloquent',
+           // 'model' => App\Models\Nhanvien::class,
+        //],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -97,6 +108,11 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
         ],
+       // 'nhanviens' => [
+         //   'provider' => 'nhanviens',
+           // 'table' => 'password_resets',
+            //'expire' => 60,
+        //],
     ],
 
 ];

@@ -21,6 +21,14 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            //$table->tinyInteger('level')->default(0);
+           // $table->tinyInteger('status')->default(0);
+            //$table->unsignedTinyInteger('sex')->default('1')->comment('1: Nam, 2: Nữ');
+           // $table->string('sex');
+           // $table->string('dateofbirth');            
+            //$table->string('location',250);
+            //$table->string('phone',11);
+            
         });
     }
 

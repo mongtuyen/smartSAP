@@ -8,7 +8,7 @@ class Duyetbai extends Model
 {
     public    $timestamps   = false;
     protected $table        = 'duyetbai';
-    protected $fillable     = ['db_trangThai','db_thoiGian'];
+    protected $fillable     = ['db_trangThai','db_thoiGian',];
     protected $guarded      = ['db_nguoiDuyet','db_baiViet'];
     protected $primaryKey   = ['db_nguoiDuyet','db_baiViet'];
     protected $dates        = ['db_thoiGian'];
