@@ -16,9 +16,10 @@ class CreateBaivietTable extends Migration
         Schema::create('baiviet', function (Blueprint $table) {
             $table->engine ='InnoDB';
             $table->increments('bv_ma');
-            $table->string('bv_tieuDe',50);
+            $table->text('bv_tieuDe');
             $table->dateTime('bv_ngayDang')->default(DB::raw('CURRENT_TIMESTAMP')); 
-            $table->string('bv_moTaNgan',1000);
+            $table->text('bv_moTaNgan');
+            $table->string('bv_hinh',255);
             $table->longText('bv_noiDung');
             $table->unsignedInteger('bv_soLuotXem');
             $table->unsignedTinyInteger('bv_noiBat')->default('1')->comment('1: Nổi bật, 2: Không nổi bật');

@@ -11,8 +11,11 @@ class Linhvuc extends Model
     protected $fillable     = ['lv_ten'];
     protected $guarded      = ['lv_ma'];
     protected $primaryKey   = 'lv_ma';
-    public function chuDes()
+    public function cacchuDe()
     {
         return $this->hasMany('App\Chude', 'lv_ma', 'lv_ma');
+    }
+    public function cacbaiViet(){
+        return $this->hasManyThrough('App\Baiviet','App\Chude','lv_ma','cd_ma','lv_ma');
     }
 }

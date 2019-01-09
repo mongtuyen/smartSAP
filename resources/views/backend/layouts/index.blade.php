@@ -181,7 +181,7 @@ desired effect
               <!-- The user image in the navbar-->
               <img src="{{asset('theme/adminlte/img/bus1.jpg')}}" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Bus Cute</span>
+              <span class="hidden-xs">Admin</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -416,9 +416,12 @@ desired effect
 <!-- AdminLTE App -->
 <script src="{{asset('theme/adminlte/js/adminlte.min.js')}}"></script>
 
+<script type="text/javascript" language="javascript" src="{{asset('theme/ckeditor/ckeditor.js')}}"></script>
+
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
      @yield('custom-scripts')
+    
 </body>
 </html>

@@ -16,7 +16,7 @@ class CreateBinhluanTable extends Migration
         Schema::create('binhluan', function (Blueprint $table) {
             $table->engine ='InnoDB';
             $table->increments('bl_ma');
-            $table->string('bl_noiDung',1000);
+            $table->text('bl_noiDung');
             $table->dateTime('bl_ngayDang')->default(DB::raw('CURRENT_TIMESTAMP')); 
             $table->unsignedTinyInteger('bl_trangThai')->default('1')->comment('1: Đạt, 2: Không đạt');
             $table->unsignedInteger('nv_duyet');

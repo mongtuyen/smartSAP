@@ -1,7 +1,7 @@
 @extends('backend.layouts.index')
 
 @section('title')
-Hiệu chỉnh vai trò
+Hiệu chỉnh chủ đề
 @endsection
 
 @section('main-content')
@@ -15,12 +15,12 @@ Hiệu chỉnh vai trò
     </div>
 @endif
 
-<form method="post" action="{{ route('danhsachvaitro.update', ['id' => $vaitro->vt_ma]) }}"> 
+<form method="post" action="{{ route('danhsachchude.update', ['id' => $chude->cd_ma]) }}"> 
     <input type="hidden" name="_method" value="PUT" />
     {{ csrf_field() }}
     <div class="form-group">
-        <label for="vt_ten">Tên</label>
-        <input type="text" class="form-control" id="vt_ten" name="vt_ten" value="{{ $vaitro->vt_ten }}" placeholder="Nhập tên">
+        <label for="cd_ten">Tên</label>
+        <input type="text" class="form-control" id="cd_ten" name="cd_ten" value="{{ $chude->cd_ten }}" placeholder="Nhập tên">
     </div>
     
 

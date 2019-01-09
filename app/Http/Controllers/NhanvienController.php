@@ -142,7 +142,7 @@ class NhanvienController extends Controller
         $nhanvien->save();
         
 
-        Session::flash('alert-info', 'Cập nhật thành công ^^~!!!');
+        Session::flash('alert-info', 'Cập nhật thành công!');
         return redirect()->route('danhsachnhanvien.index');
     }
 
@@ -157,7 +157,7 @@ class NhanvienController extends Controller
         $nhanvien = Nhanvien::where("nv_ma",  $id)->first();
         $nhanvien->delete();
 
-        Session::flash('alert-danger', 'Xoá dữ liệu thành công!');
+        Session::flash('alert-danger', 'Xoá thành công!');
         return redirect()->route('danhsachnhanvien.index');
     }
 }

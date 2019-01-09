@@ -15,10 +15,10 @@ class CreateSlideTable extends Migration
     {
         Schema::create('slide', function (Blueprint $table) {
             $table->increments('sl_ma');
-            $table->string('sl_ten',300);
-            $table->string('sl_hinh',300);
+            $table->string('sl_ten',255);
+            $table->string('sl_hinh',255);
             $table->mediumText('sl_noiDung');
-            $table->string('sl_link',300);
+            $table->string('sl_link',255);
         });
     }
 

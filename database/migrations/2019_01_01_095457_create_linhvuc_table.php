@@ -16,7 +16,7 @@ class CreateLinhvucTable extends Migration
         Schema::create('linhvuc', function (Blueprint $table) {
             $table->engine='InnoDB';
             $table->increments('lv_ma');
-            $table->string('lv_ten',300);
+            $table->string('lv_ten',200);
             
         });
     }

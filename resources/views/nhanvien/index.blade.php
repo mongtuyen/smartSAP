@@ -37,7 +37,6 @@ Danh sách nhân viên
                 <td>{{ $nhanvien->nv_gioiTinh }}</td>
                 <td>{{ $nhanvien->vaiTro->vt_ten }}</td>
                 <td>{{ $nhanvien->nv_email }}</td>
-               
                 
                 <td>{{ $nhanvien->nv_ngaySinh }}</td>
                 <td>{{ $nhanvien->nv_diaChi }}</td>

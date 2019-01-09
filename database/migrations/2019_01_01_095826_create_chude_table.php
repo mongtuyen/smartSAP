@@ -16,7 +16,7 @@ class CreateChudeTable extends Migration
         Schema::create('chude', function (Blueprint $table) {
             $table->engine='InnoDB';
             $table->increments('cd_ma');
-            $table->string('cd_ten',500);
+            $table->string('cd_ten',255);
             $table->unsignedInteger('lv_ma');
             $table->foreign('lv_ma')->references('lv_ma')->on('linhvuc')->onDelete('cascade')->onUpdate('cascade');
         

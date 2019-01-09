@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Baiviet;
 use App\Nhanvien;
+use DB;
 use App\Chude;
-
+use App\Linhvuc;
 class BaivietController extends Controller
 {
     /**
@@ -15,44 +16,16 @@ class BaivietController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    protected function setKeysForSaveQuery(Builder $query)
-    {
-        $keys = $this->getKeyName();
-        if(!is_array($keys)){
-            return parent::setKeysForSaveQuery($query);
-        }
-    
-        foreach($keys as $keyName){
-            $query->where($keyName, '=', $this->getKeyForSaveQuery($keyName));
-        }
-    
-        return $query;
-    }
-    
-    /**
-     * Get the primary key value for a save query.
-     *
-     * @param mixed $keyName
-     * @return mixed
-     */
-    protected function getKeyForSaveQuery($keyName = null)
-    {
-        if(is_null($keyName)){
-            $keyName = $this->getKeyName();
-        }
-    
-        if (isset($this->original[$keyName])) {
-            return $this->original[$keyName];
-        }
-    
-        return $this->getAttribute($keyName);
-    }
+  
     public function index()
     {
-        $ds_baiviet = Baiviet::all(); 
+        $ds_baiviet = DB::table('baiviet')->get();
+        
         return view('baiviet.index')
-            // với dữ liệu truyền từ Controller qua View, được đặt tên là `danhsachsanpham`
             ->with('danhsachbaiviet', $ds_baiviet);
+        // $ds_baiviet = Baiviet::all()
+        //     // với dữ liệu truyền từ Controller qua View, được đặt tên là `danhsachsanpham`
+        //     ->with('danhsachbaiviet', $ds_baiviet);
     
     }
 
@@ -63,11 +36,11 @@ class BaivietController extends Controller
      */
     public function create()
     {
+        $ds_linhvuc=Linhvuc::all();
         $ds_baiviet=Baiviet::all();
         $ds_chude = Chude::all();
         $ds_nhanvien = Nhanvien::all();
-        return view('baiviet.create')->with('danhsachchude',$ds_chude)
-            ->with('danhsachnhanvien',$ds_nhanvien);
+        return view('baiviet.create',['danhsachchude'=>$ds_chude,'danhsachnhanvien'=>$ds_nhanvien,'danhsachlinhvuc'=>$ds_linhvuc]);
     }
 
     /**
@@ -78,6 +51,20 @@ class BaivietController extends Controller
      */
     public function store(Request $request)
     {
+       $this->validate($request,[
+           'cd_ma'=>'required',
+           'bv_tieuDe'=>'required|min:3',
+           'bv_moTaNgan'=>'required',
+           'bv_noiDung'=>'required',
+           
+           
+           
+       ],[
+           'cd_ma.required'=>"Bạn chưa chọn chủ đề",
+           'bv_tieuDe.required'=>"Bạn chưa nhập tiêu đề",
+           'bv_moTaNgan.required'=>"Bạn chưa nhập mô tả",
+           'bv_noiDung.required'=>"Bạn chưa nhập nội dung",
+       ]);
         $baiviet=new Baiviet();
         $baiviet->bv_ma=$request->bv_ma;
         $baiviet->bv_tieuDe=$request->bv_tieuDe;
@@ -88,6 +75,16 @@ class BaivietController extends Controller
         $baiviet->bv_noiBat=$request->bv_noiBat;
         $baiviet->nv_ma=$request->nv_ma;
         $baiviet->cd_ma=$request->cd_ma;
+        if($request->hasFile('bv_hinh'))
+        {
+            $file = $request->bv_hinh;
+
+            // Lưu tên hình vào column sp_hinh
+            $baiviet->bv_hinh = $file->getClientOriginalName();
+            
+            // Chép file vào thư mục "photos"
+            $fileSaved = $file->storeAs('public/photos', $baiviet->bv_hinh);
+        }
         $baiviet->save();
         Session::flash('alert-info','Thêm thành công!');
         return redirect()->route('danhsachbaiviet.index');
@@ -115,11 +112,14 @@ class BaivietController extends Controller
     {
         $baiviet = Baiviet::where("bv_ma",  $id)->first();
         $ds_nhanvien = Nhanvien::all();
+        $ds_linhvuc=Linhvuc::all();
         $ds_chude = Chude::all();
-        return view('baiviet.edit')
-            ->with('baiviet', $baiviet)
-            ->with('danhsachchude', $ds_chude)
-            ->with('danhsachnhanvien',$ds_nhanvien);
+        return view('baiviet.edit',['danhsachchude'=>$ds_chude,'danhsachnhanvien'=>$ds_nhanvien,'danhsachlinhvuc'=>$ds_linhvuc]);
+    
+        // return view('baiviet.edit')
+        //     ->with('baiviet', $baiviet)
+        //     ->with('danhsachchude', $ds_chude)
+        //     ->with('danhsachnhanvien',$ds_nhanvien);
     }
 
     /**
@@ -141,6 +141,19 @@ class BaivietController extends Controller
         $baiviet->bv_noiBat=$request->bv_noiBat;
         $baiviet->nv_ma=$request->nv_ma;
         $baiviet->cd_ma=$request->cd_ma;
+        if($request->hasFile('bv_hinh'))
+        {
+            // Xóa hình cũ để tránh rác
+            Storage::delete('public/photos/' . $baiviet->bv_hinh);
+
+            // Upload hình mới
+            // Lưu tên hình vào column sp_hinh
+            $file = $request->bv_hinh;
+            $slide->bv_hinh = $file->getClientOriginalName();
+            
+            // Chép file vào thư mục "photos"
+            $fileSaved = $file->storeAs('public/photos', $baiviet->bv_hinh);
+        }
         $baiviet->save();
         Session::flash('alert-info','Cập nhật thành công!');
         return redirect()->route('danhsachbaiviet.index');
@@ -156,8 +169,12 @@ class BaivietController extends Controller
     public function destroy($id)
     {
         $baiviet=Baiviet::where("bv_ma",$id)->first();
+        if(empty($baiviet) == false)
+        {
+            Storage::delete('public/photos/' . $baiviet->bv_hinh);
+        }
         $baiviet->delete();
-        Session::flash('alert-info', 'Xóa thành công ^^~!!!');
+        Session::flash('alert-info', 'Xóa thành công!');
         return redirect()->route('danhsachbaiviet.index');
     
     }

@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Linhvuc;
 class Chude extends Model
 {
     public    $timestamps   = false;
@@ -11,7 +11,7 @@ class Chude extends Model
     protected $fillable     = ['cd_ten','lv_ma'];
     protected $guarded      = ['cd_ma'];
     protected $primaryKey   = 'cd_ma';
-    public function linhVuc()
+    public function khung()
     {
         return $this->belongsTo('App\Linhvuc', 'lv_ma', 'lv_ma');
     }
@@ -21,7 +21,7 @@ class Chude extends Model
     }
     public function slbaiViet()
     {
-        return $this->hasManyThrough('App\Baiviet','App\Chude', 'bv_ma', 'bv_ma','bv_ma');
+        return $this->hasManyThrough('App\Baiviet','App\Chude', 'bv_ma', 'bv_ma');
     }
 
 }

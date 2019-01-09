@@ -31,8 +31,40 @@ Hiệu chỉnh slide
     </div>
 
     <div class="form-group">
+        <label for="nv_ma">Tác giả</label>
+        <select name="nv_ma" class="form-control">
+            @foreach($danhsachnhanvien as $nhanvien)
+                @if($nhanvien->nv_ma == $nhanvien->nv_ma)
+                <option value="{{ $nhanvien->nv_ma }}" selected>{{ $nhanvien->nv_ten }}</option>
+                @else
+                <option value="{{ $nhanvien->nv_ma }}">{{ $nhanvien->nv_ten }}</option>
+                @endif
+            @endforeach
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="cd_ma">Chủ đề</label>
+        <select name="cd_ma" class="form-control">
+            @foreach($danhsachchude as $chude)
+                @if($chude->cd_ma == $chude->cd_ma)
+                <option value="{{ $chude->cd_ma }}" selected>{{ $chude->cd_ten }}</option>
+                @else
+                <option value="{{ $chude->cd_ma }}">{{ $chude->cd_ten }}</option>
+                @endif
+            @endforeach
+        </select>
+    </div>
+
+    <div class="form-group">
         <label for="bv_ngayDang">Ngày đăng</label>
         <input type="text" class="form-control" id="bv_ngayDang" name="bv_ngayDang" value="{{ $baiviet->bv_ngayDang }}" data-mask-datetime>
+    </div>
+    <div class="form-group">
+        <div class="file-loading">
+            <label>Hình ảnh</label>
+            <input id="bv_hinh" type="file" name="bv_hinh">
+        </div>
     </div>
     <div class="form-group">
         <label for="bv_moTaNgan">Mô tả ngắn</label>
@@ -55,22 +87,6 @@ Hiệu chỉnh slide
     
 
 
-
-    <div class="form-group">
-        <div class="file-loading">
-            <label>Hình ảnh</label>
-            <input id="sl_hinh" type="file" name="sl_hinh">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="sl_noiDung">Nội dung</label>
-        <input type="text" class="form-control" id="sl_noiDung" name="sl_noiDung" value="{{ $slide->sl_noiDung }}" placeholder="Nhập tên">
-    </div>
-    <div class="form-group">
-        <label for="sl_link">Link</label>
-        <input type="text" class="form-control" id="sl_link" name="sl_link" value="{{ $slide->sl_link }}" placeholder="Nhập tên">
-    </div>
-
     <button type="submit" class="btn btn-primary">Lưu</button>
 </form>
 @endsection
@@ -85,7 +101,7 @@ Hiệu chỉnh slide
 
 <script>
     $(document).ready(function() {
-        $("#sl_hinh").fileinput({
+        $("#bv_hinh").fileinput({
             theme: 'fas',
             showUpload: false,
             showCaption: false,
@@ -99,12 +115,12 @@ Hiệu chỉnh slide
             initialPreviewShowDelete: false,
             initialPreviewAsData: true,
             initialPreview: [
-                "{{ asset('storage/photos/' . $slide->sl_hinh) }}"
+                "{{ asset('storage/photos/' . $baiviet->bv_hinh) }}"
             ],
             initialPreviewConfig: [
                 {
-                    caption: "{{ $slide->sl_hinh }}", 
-                    size: {{ Storage::exists('public/photos/' . $slide->sl_hinh) ? Storage::size('public/photos/' . $slide->sl_hinh) : 0 }}, 
+                    caption: "{{ $baiviet->bv_hinh }}", 
+                    size: {{ Storage::exists('public/photos/' . $baiviet->bv_hinh) ? Storage::size('public/photos/' . $baiviet->bv_hinh) : 0 }}, 
                     width: "120px", 
                     url: "{$url}", 
                     key: 1

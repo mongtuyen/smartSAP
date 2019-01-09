@@ -1,7 +1,7 @@
 @extends('backend.layouts.index')
 
 @section('title')
-Thêm mới sản phẩm
+Thêm mới bai viet
 @endsection
 
 @section('custom-css')
@@ -24,9 +24,23 @@ Thêm mới sản phẩm
 
 <form method="post" action="{{ route('danhsachbaiviet.store') }}" enctype="multipart/form-data">
     {{ csrf_field() }}
+
+    <div class="form-group">
+        <label for="lv_ma">Lĩnh vực</label>
+        <select name="lv_ma" class="form-control" id="lv_ma">
+            @foreach($danhsachlinhvuc as $linhvuc)
+                @if(old('lv_ma') == $linhvuc->lv_ma)
+                <option value="{{ $linhvuc->lv_ma }}" selected>{{ $linhvuc->lv_ten }}</option>
+                @else
+                <option value="{{ $linhvuc->lv_ma }}">{{ $linhvuc->lv_ten }}</option>
+                @endif
+            @endforeach
+        </select>
+    </div>
+
     <div class="form-group">
         <label for="cd_ma">Chủ đề bài viết</label>
-        <select name="cd_ma" class="form-control">
+        <select name="cd_ma" class="form-control" id="cd_ma">
             @foreach($danhsachchude as $chude)
                 @if(old('cd_ma') == $chude->cd_ma)
                 <option value="{{ $chude->cd_ma }}" selected>{{ $chude->cd_ten }}</option>
@@ -63,22 +77,37 @@ Thêm mới sản phẩm
     </div>
     <div class="form-group">
         <label for="bv_moTaNgan">Mô tả ngắn</label>
-        <input type="text" class="form-control" id="bv_moTaNgan" name="bv_moTaNgan" value="{{ old('bv_moTaNgan') }}">
+        <textarea id="bv_moTaNgan" class="form-control ckeditor" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+        <div class="file-loading">
+            <label>Hình ảnh</label>
+            <input id="bv_hinh" type="file" name="bv_hinh">
+        </div>
     </div>
     <div class="form-group">
         <label for="bv_noiDung">Nội dung</label>
-        <input type="text" class="form-control" id="bv_noiDung" name="bv_noiDung" value="{{ old('bv_noiDung') }}">
+        <textarea id="bv_noiDung" class="form-control ckeditor" rows="5"></textarea>
     </div>
     <div class="form-group">
         <label for="bv_soLuotXem">Số lượt xem</label>
         <input type="number" class="form-control" id="bv_soLuotXem" name="bv_soLuotXem" value="{{ old('bv_soLuotXem') }}">
     </div>
+    <div class="form-group">
+        <label for="bv_noiBat">Nổi bật</label>
+        <label class ="radio-inline">
+            <input name="NoiBat" value="1" checked="" type="radio">Có  
+        </label>
+        <label class ="radio-inline">
+            <input name="NoiBat" value="2" checked="" type="radio">Không
+        </label>
+    </div>
 
-    <label for="bv_noiBat">Nổi bật</label>
+    <!-- <label for="bv_noiBat">Nổi bật</label>
     <select name="bv_noiBat" class="form-control">
         <option value="1" {{ old('bv_noiBat') == 1 ? "selected" : "" }}>Nổi bật</option>
         <option value="2" {{ old('bv_noiBat') == 2 ? "selected" : "" }}>Không nổi bật</option>
-    </select>
+    </select> -->
     
     <button type="submit" class="btn btn-primary">Lưu</button>
 </form>
@@ -94,7 +123,7 @@ Thêm mới sản phẩm
 
 <script>
     $(document).ready(function() {
-        $("#sp_hinh").fileinput({
+        $("#bv_hinh").fileinput({
             theme: 'fas',
             showUpload: false,
             showCaption: false,
@@ -103,7 +132,7 @@ Thêm mới sản phẩm
             previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
             overwriteInitial: false
         });
-        $("#sp_hinhanhlienquan").fileinput({
+        $("#bv_hinhanhlienquan").fileinput({
             theme: 'fas',
             showUpload: false,
             showCaption: false,
@@ -113,6 +142,14 @@ Thêm mới sản phẩm
             overwriteInitial: false,
             allowedFileExtensions: ["jpg", "gif", "png", "txt"]
         });
+           $("#lv_ma").change(function(){
+                var lv_ma=$(this).val();
+                $.get("ajax/chude/"+lv_ma,function(data){
+                   alert(data);
+                   //$("#cd_ma").html(data);
+                });
+            });
+        
     });
 </script>
 
@@ -121,10 +158,25 @@ Thêm mới sản phẩm
 <script src="{{ asset('theme/adminlte/plugins/input-mask/jquery.inputmask.date.extensions.js') }}"></script>
 <script src="{{ asset('theme/adminlte/plugins/input-mask/jquery.inputmask.extensions.js') }}"></script>
 
-<script>
+<!-- <script>
 $(document).ready(function(){
     
 });
-</script>
+</script> -->
 
+@endsection
+<!--AJAX-->
+@section('script')
+    <script>
+        $(document).ready(function(){
+            //alert("chvb");
+            $("lv_ma").change(function(){
+                var lv_ma=$(this).val();
+                $.get("admin/ajax/chude/"+lv_ma,function(data){
+                   //alert(data);
+                   $("#cd_ma").html(data);
+                });
+            });
+        });
+    </script>
 @endsection

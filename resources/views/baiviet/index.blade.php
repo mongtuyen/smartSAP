@@ -21,12 +21,13 @@ Danh sách bài viết
             <th>Mã</th>
             <th>Tiêu đề</th>
             <th>Ngày đăng</th>
-            <th>Mô tả ngắn</th>
-            <th>Nội dung</th>
+            <th>Mô tả ngắn</th> 
+            <th>Hình</th>           
             <th>Số lượt xem</th>
             <th>Nổi bật</th>
             <th>Tác giả</th>
             <th>Thuộc chủ đề</th>
+            <th>Thuộc lĩnh vực</th>
             <td>Sửa</td>
             <td>Xoá</td>
         </tr>
@@ -35,15 +36,21 @@ Danh sách bài viết
         @foreach($danhsachbaiviet as $baiviet)
             <tr>
                 <td>{{ $baiviet->bv_ma }}</td>
-                <td>{{ $baiviet->bv_tieuDe }}</td>
-                
+                <td>{{ $baiviet->bv_tieuDe }}</td>               
                 <td>{{ $baiviet->bv_ngayDang }}</td>
                 <td>{{ $baiviet->bv_moTaNgan }}</td>
-                <td>{{ $baiviet->bv_noiDung }}</td>
+                <td><img src="{{ asset('storage/photos/' . $baiviet->bv_hinh) }}" class="img-list" /></td>
                 <td>{{ $baiviet->bv_soLuotXem }}</td>
-                <td>{{ $baiviet->bv_noiBat }}</td>
-                <td>{{ $baiviet->tacGia->nv_hoTen }}</td>
-                <td>{{ $baiviet->chuDe->cd_ten }}</td>
+                <td>
+                    @if($baiviet->bv_noiBat==1)
+                    {{'Có'}}
+                    @else
+                    {{'Không'}}
+                    @endif
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td><a href="{{ route('danhsachbaiviet.edit', ['id' => $baiviet->bv_ma]) }}">Sửa</a></td>
                 <td>
                     <form method="post" action="{{ route('danhsachbaiviet.destroy', ['id' => $baiviet->bv_ma]) }}">

@@ -16,7 +16,7 @@ class CreateVideoTable extends Migration
         Schema::create('video', function (Blueprint $table) {
             $table->engine='InnoDB';
             $table->increments('vd_stt');
-            $table->string('vd_ten',500);
+            $table->string('vd_ten',255);
             $table->unsignedInteger('bv_ma');
             $table->foreign('bv_ma')->references('bv_ma')->on('baiviet')->onDelete('cascade')->onUpdate('cascade');
        

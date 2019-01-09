@@ -45,6 +45,7 @@ class ChuDeController extends Controller
         $chude=new Chude();
         $chude->cd_ten=$request->cd_ten;
         $chude->lv_ma = $request->lv_ma;
+        $chude->save();
         Session::flash('alert-info', 'Thêm thành công!');
         return redirect()->route('danhsachchude.index');
     
@@ -88,7 +89,7 @@ class ChuDeController extends Controller
     {
         $chude = Chude::where("cd_ma", $id)->first();
         $chude->cd_ten = $request->cd_ten;
-        $chude->lv_ma=$request->lv_ma;
+      
         $chude->save();
 
         Session::flash('alert-info', 'Cập nhật thành công!');
