@@ -214,7 +214,7 @@ desired effect
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="{{route('home')}}" class="btn btn-default btn-flat">Đăng xuất</a>
+                  <a href="#" class="btn btn-default btn-flat">Đăng xuất</a>
     
                 </div>
               </li>
