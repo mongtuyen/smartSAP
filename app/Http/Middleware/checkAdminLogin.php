@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Middleware;
-//use Auth;
+
+use Illuminate\Support\Facades\Auth;
 use Closure;
 
 class checkAdminLogin
@@ -20,7 +21,7 @@ class checkAdminLogin
         {
             return $next($request);
         }else{
-            return redirect('/');
+            return redirect('/home');
         }
          
     }

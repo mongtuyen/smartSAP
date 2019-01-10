@@ -1,7 +1,7 @@
 @extends('backend.layouts.index')
 
 @section('title')
-Thêm mới bai viet
+Thêm mới bài viết
 @endsection
 
 @section('custom-css')
@@ -65,15 +65,16 @@ Thêm mới bai viet
 
     <div class="form-group">
         <label for="bv_ma">Mã</label>
-        <input type="text" class="form-control" id="bv_ma" name="bv_ma" value="{{ old('bv_ma') }}">
+        <input type="text" class="form-control" id="bv_ma" name="bv_ma">
     </div>
+    
     <div class="form-group">
         <label for="bv_tieuDe">Tiêu đề</label>
-        <input type="text" class="form-control" id="bv_tieuDe" name="bv_tieuDe" value="{{ old('bv_tieuDe') }}">
+        <input type="text" class="form-control" id="bv_tieuDe" name="bv_tieuDe">
     </div>
     <div class="form-group">
         <label for="bv_ngayDang">Ngày đăng</label>
-        <input type="text" class="form-control" id="bv_ngayDang" name="bv_ngayDang" value="{{ old('bv_ngayDang') }}" data-mask-datetime>
+        <input type="text" class="form-control" id="bv_ngayDang" name="bv_ngayDang"data-mask-datetime>
     </div>
     <div class="form-group">
         <label for="bv_moTaNgan">Mô tả ngắn</label>
@@ -91,7 +92,7 @@ Thêm mới bai viet
     </div>
     <div class="form-group">
         <label for="bv_soLuotXem">Số lượt xem</label>
-        <input type="number" class="form-control" id="bv_soLuotXem" name="bv_soLuotXem" value="{{ old('bv_soLuotXem') }}">
+        <input type="number" class="form-control" id="bv_soLuotXem" name="bv_soLuotXem">
     </div>
     <div class="form-group">
         <label for="bv_noiBat">Nổi bật</label>
@@ -144,9 +145,9 @@ Thêm mới bai viet
         });
            $("#lv_ma").change(function(){
                 var lv_ma=$(this).val();
-                $.get("ajax/chude/"+lv_ma,function(data){
-                   alert(data);
-                   //$("#cd_ma").html(data);
+                $.get("/admin/ajax/chude/"+lv_ma,function(data){
+                   //alert(data);
+                   $("#cd_ma").html(data);
                 });
             });
         

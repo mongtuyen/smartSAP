@@ -13,12 +13,6 @@ class TestController extends Controller
     		'password'=>$request->password,
     	];
     	if(Auth::attempt($data)){
-            //return redirect()->route('danhsachbaiviet.index');
-            $data=[
-                'username'=>$request->username,
-                'password'=>$request->password,
-                'level'=>1,
-            ];
             return redirect()->route('danhsachbaiviet.index');
             
     	}else{

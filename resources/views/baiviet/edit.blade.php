@@ -1,7 +1,7 @@
 @extends('backend.layouts.index')
 
 @section('title')
-Hiệu chỉnh slide
+Hiệu chỉnh bài viết
 @endsection
 
 @section('custom-css')
@@ -58,7 +58,7 @@ Hiệu chỉnh slide
 
     <div class="form-group">
         <label for="bv_ngayDang">Ngày đăng</label>
-        <input type="text" class="form-control" id="bv_ngayDang" name="bv_ngayDang" value="{{ $baiviet->bv_ngayDang }}" data-mask-datetime>
+        <input type="text" class="form-control" id="bv_ngayDang" name="bv_ngayDang" value="{{ old('bv_ngayDang',$baiviet->bv_ngayDang) }}" data-mask-datetime>
     </div>
     <div class="form-group">
         <div class="file-loading">
@@ -68,15 +68,15 @@ Hiệu chỉnh slide
     </div>
     <div class="form-group">
         <label for="bv_moTaNgan">Mô tả ngắn</label>
-        <input type="text" class="form-control" id="bv_moTaNgan" name="bv_moTaNgan" value="{{ $baiviet->bv_moTaNgan }}">
+        <input type="text" class="form-control" id="bv_moTaNgan" name="bv_moTaNgan" value="{{ old('bv_moTaNgan', $baiviet->bv_moTaNgan) }}">
     </div>
     <div class="form-group">
         <label for="bv_noiDung">Nội dung</label>
-        <input type="text" class="form-control" id="bv_noiDung" name="bv_noiDung" value="{{ $baiviet->bv_noiDung }}">
+        <input type="text" class="form-control" id="bv_noiDung" name="bv_noiDung" value="{{ old('bv_noiDung', $baiviet->bv_noiDung) }}">
     </div>
     <div class="form-group">
         <label for="bv_soLuotXem">Số lượt xem</label>
-        <input type="number" class="form-control" id="bv_soLuotXem" name="bv_soLuotXem" value="{{ $baiviet->bv_soLuotXem }}">
+        <input type="number" class="form-control" id="bv_soLuotXem" name="bv_soLuotXem" value="{{ old('bv_soLuotXem',$baiviet->bv_soLuotXem) }}">
     </div>
 
     <label for="bv_noiBat">Nổi bật</label>

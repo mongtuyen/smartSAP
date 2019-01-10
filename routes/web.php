@@ -29,18 +29,19 @@ Route::get('/', function () {
 });
 //$router->group(['middleware' => ['auth']], function($router)
 //{
-    Route::group(['prefix'=>'admin'], function(){
+   // Route::group(['prefix'=>'admin','middleware'=>'checkAdminLogin'], function(){
         Route::resource('/danhsachvaitro','VaitroController');
         Route::resource('/danhsachchude','ChudeController');
         Route::resource('/danhsachlinhvuc','LinhvucController');
         Route::resource('/danhsachnhanvien','NhanvienController');
         Route::resource('/danhsachslide','SLideController');
         Route::resource('/danhsachbaiviet','BaivietController');
-     
-    });
-    Route::group(['prefix'=>'ajax'],function(){
-        Route::get('chude/{lv_ma}','AjaxController@getChuDe');
-    });
+        Route::get('/ajax/chude/{lv_ma}','AjaxController@getChuDe');
+   
+   // });
+    // Route::group(['prefix'=>'ajax'],function(){
+    //     Route::get('ajax/chude/{lv_ma}','AjaxController@getChuDe');
+    // });
 //});
     // Route::resource('/admin/danhsachvaitro','VaitroController');
     //  Route::resource('/admin/danhsachchude','ChudeController');
@@ -53,12 +54,12 @@ Route::get('/', function () {
     //     Route::get('chude/{lv_ma}','AjaxController@getChuDe');
     // });
 // //});
-Route::get('admin/profile', function () {
-    //
-})->middleware('checkAdminLogin');
-Auth::routes();
+ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@getdangnhapAdmin');
+// Route::post('/home','HomeController@postdangnhapAdmin');
+ Route::get('/home', 'HomeController@getdangxuatAdmin');
 
 Route::post('logintest','TestController@check');
 //Route::post('logout','TestController@logout');

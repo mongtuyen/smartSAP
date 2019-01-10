@@ -27,7 +27,7 @@ Hiệu chỉnh slide
     {{ csrf_field() }}
     <div class="form-group">
         <label for="vt_ten">Tên</label>
-        <input type="text" class="form-control" id="sl_ten" name="sl_ten" value="{{ $slide->sl_ten }}" placeholder="Nhập tên">
+        <input type="text" class="form-control" id="sl_ten" name="sl_ten" value="{{ old('sl_ten',$slide->sl_ten) }}" placeholder="Nhập tên">
     </div>
     <div class="form-group">
         <div class="file-loading">
@@ -37,11 +37,11 @@ Hiệu chỉnh slide
     </div>
     <div class="form-group">
         <label for="sl_noiDung">Nội dung</label>
-        <input type="text" class="form-control" id="sl_noiDung" name="sl_noiDung" value="{{ $slide->sl_noiDung }}" placeholder="Nhập tên">
+        <input type="text" class="form-control" id="sl_noiDung" name="sl_noiDung" value="{{ old('sl_noiDung', $slide->sl_noiDung) }}" placeholder="Nhập tên">
     </div>
     <div class="form-group">
         <label for="sl_link">Link</label>
-        <input type="text" class="form-control" id="sl_link" name="sl_link" value="{{ $slide->sl_link }}" placeholder="Nhập tên">
+        <input type="text" class="form-control" id="sl_link" name="sl_link" value="{{ old('sl_link',$slide->sl_link) }}" placeholder="Nhập tên">
     </div>
 
     <button type="submit" class="btn btn-primary">Lưu</button>

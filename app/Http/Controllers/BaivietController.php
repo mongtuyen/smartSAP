@@ -85,6 +85,9 @@ class BaivietController extends Controller
             // Chép file vào thư mục "photos"
             $fileSaved = $file->storeAs('public/photos', $baiviet->bv_hinh);
         }
+        else{
+            $baiviet->bv_hinh="";
+        }
         $baiviet->save();
         Session::flash('alert-info','Thêm thành công!');
         return redirect()->route('danhsachbaiviet.index');
@@ -149,7 +152,7 @@ class BaivietController extends Controller
             // Upload hình mới
             // Lưu tên hình vào column sp_hinh
             $file = $request->bv_hinh;
-            $slide->bv_hinh = $file->getClientOriginalName();
+            $baiviet->bv_hinh = $file->getClientOriginalName();
             
             // Chép file vào thư mục "photos"
             $fileSaved = $file->storeAs('public/photos', $baiviet->bv_hinh);
