@@ -63,3 +63,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('logintest','TestController@check');
 //Route::post('logout','TestController@logout');
+
+Route::get('/', 'FrontendController@index')->name('frontend.home');
