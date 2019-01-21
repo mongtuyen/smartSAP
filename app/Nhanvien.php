@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Nhanvien extends Authenticatable
+class Nhanvien extends Model
 {
     use Notifiable;
     public    $timestamps   = false;
@@ -25,7 +25,7 @@ class Nhanvien extends Authenticatable
     }
     public function baiViets()
     {
-        return $this->hasMany('App\Baiviet', 'nv_tacGia', 'nv_ma');
+        return $this->hasMany('App\Baiviet', 'nv_ma', 'nv_ma');
     }
     /*public function duyetBais()
     {
