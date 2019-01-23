@@ -19,14 +19,10 @@ class BaivietController extends Controller
   
     public function index()
     {
-        $ds_baiviet = DB::table('baiviet')->get();
-        
+        $ds_baiviet = Baiviet::paginate(5);
         return view('baiviet.index')
             ->with('danhsachbaiviet', $ds_baiviet);
-        // $ds_baiviet = Baiviet::all()
-        //     // với dữ liệu truyền từ Controller qua View, được đặt tên là `danhsachsanpham`
-        //     ->with('danhsachbaiviet', $ds_baiviet);
-    
+       
     }
 
     /**
@@ -37,7 +33,6 @@ class BaivietController extends Controller
     public function create()
     {
         $ds_linhvuc=Linhvuc::all();
-        $ds_baiviet=Baiviet::all();
         $ds_chude = Chude::all();
         $ds_nhanvien = Nhanvien::all();
         return view('baiviet.create',['danhsachchude'=>$ds_chude,'danhsachnhanvien'=>$ds_nhanvien,'danhsachlinhvuc'=>$ds_linhvuc]);
@@ -55,9 +50,7 @@ class BaivietController extends Controller
            'cd_ma'=>'required',
            'bv_tieuDe'=>'required|min:3',
            'bv_moTaNgan'=>'required',
-           'bv_noiDung'=>'required',
-           
-           
+           'bv_noiDung'=>'required',         
            
        ],[
            'cd_ma.required'=>"Bạn chưa chọn chủ đề",
@@ -75,6 +68,7 @@ class BaivietController extends Controller
         $baiviet->bv_noiBat=$request->bv_noiBat;
         $baiviet->nv_ma=$request->nv_ma;
         $baiviet->cd_ma=$request->cd_ma;
+        $baiviet->lv_ma=$request->lv_ma;
         if($request->hasFile('bv_hinh'))
         {
             $file = $request->bv_hinh;
@@ -117,7 +111,7 @@ class BaivietController extends Controller
         $ds_nhanvien = Nhanvien::all();
         $ds_linhvuc=Linhvuc::all();
         $ds_chude = Chude::all();
-        return view('baiviet.edit',['danhsachchude'=>$ds_chude,'danhsachnhanvien'=>$ds_nhanvien,'danhsachlinhvuc'=>$ds_linhvuc]);
+        return view('baiviet.edit',['baiviet'=>$baiviet,'danhsachchude'=>$ds_chude,'danhsachnhanvien'=>$ds_nhanvien,'danhsachlinhvuc'=>$ds_linhvuc]);
     
         // return view('baiviet.edit')
         //     ->with('baiviet', $baiviet)
@@ -144,6 +138,7 @@ class BaivietController extends Controller
         $baiviet->bv_noiBat=$request->bv_noiBat;
         $baiviet->nv_ma=$request->nv_ma;
         $baiviet->cd_ma=$request->cd_ma;
+        $baiviet->lv_ma=$request->lv_ma;
         if($request->hasFile('bv_hinh'))
         {
             // Xóa hình cũ để tránh rác

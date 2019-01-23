@@ -19,6 +19,18 @@ Hiệu chỉnh chủ đề
     <input type="hidden" name="_method" value="PUT" />
     {{ csrf_field() }}
     <div class="form-group">
+        <label for="lv_ma">Lĩnh vực</label>
+        <select name="lv_ma" class="form-control">
+            @foreach($danhsachlinhvuc as $linhvuc)
+                @if($linhvuc->lv_ma == $linhvuc->lv_ma)
+                <option value="{{ $linhvuc->lv_ma }}" selected>{{ $linhvuc->lv_ten }}</option>
+                @else
+                <option value="{{ $linhvuc->lv_ma }}">{{ $linhvuc->lv_ten }}</option>
+                @endif
+            @endforeach
+        </select>
+    </div>
+    <div class="form-group">
         <label for="cd_ten">Tên</label>
         <input type="text" class="form-control" id="cd_ten" name="cd_ten" value="{{ $chude->cd_ten }}" placeholder="Nhập tên">
     </div>

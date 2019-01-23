@@ -21,7 +21,7 @@ Danh sách bài viết
             <th>Mã</th>
             <th>Tiêu đề</th>
             <th>Ngày đăng</th>
-            <th>Mô tả ngắn</th> 
+            <th>Tóm tắt</th> 
             <th>Hình</th>           
             <th>Số lượt xem</th>
             <th>Nổi bật</th>
@@ -48,9 +48,9 @@ Danh sách bài viết
                     {{'Không'}}
                     @endif
                 </td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{$baiviet->cuaTG->nv_hoTen}}</td>
+                <td>{{$baiviet->thuocChuDe->cd_ten}}</td>
+                <td>{{$baiviet->thuocChuDe->linhvuc->lv_ten}}</td>
                 <td><a href="{{ route('danhsachbaiviet.edit', ['id' => $baiviet->bv_ma]) }}">Sửa</a></td>
                 <td>
                     <form method="post" action="{{ route('danhsachbaiviet.destroy', ['id' => $baiviet->bv_ma]) }}">
@@ -63,4 +63,5 @@ Danh sách bài viết
         @endforeach
     </tbody>
 </table>
+{{$danhsachbaiviet->links()}}
 @endsection

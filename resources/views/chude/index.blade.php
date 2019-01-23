@@ -8,10 +8,11 @@ Danh sách chủ đề
 @section('main-content')
 
 <div class="col-lg-12">
-<h1 class="page-header">Chủ đề
-    <small>danh sách</small>
+    <h1 class="page-header">Chủ đề
+        <small>danh sách</small>
     </h1>
 </div>
+
 <div class="flash-message">
     @foreach (['danger', 'warning', 'success', 'info'] as $msg)
       @if(Session::has('alert-' . $msg))
@@ -36,7 +37,7 @@ Danh sách chủ đề
                 <td>{{ $chude->cd_ma }}</td>
                 <td>{{ $chude->cd_ten }}</td>
                 <!---->
-                <td></td>
+                <td>{{$chude->linhvuc->lv_ten}}</td>
                 <td><a href="{{ route('danhsachchude.edit', ['id' => $chude->cd_ma]) }}">Sửa</a></td>
                 <td>
                     <form method="post" action="{{ route('danhsachchude.destroy', ['id' => $chude->cd_ma]) }}">
@@ -47,6 +48,8 @@ Danh sách chủ đề
                 </td>
             </tr>
         @endforeach
+        
     </tbody>
 </table>
+{{$danhsachchude->links()}}
 @endsection

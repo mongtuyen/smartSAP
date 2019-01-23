@@ -15,7 +15,7 @@ class Linhvuc extends Model
     {
         return $this->hasMany('App\Chude', 'lv_ma', 'lv_ma');
     }
-    public function cacbaiViet(){
+    public function cacBaiViet(){
         return $this->hasManyThrough('App\Baiviet','App\Chude','lv_ma','cd_ma','lv_ma');
     }
 }

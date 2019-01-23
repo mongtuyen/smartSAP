@@ -78,11 +78,12 @@ Thêm mới bài viết
     </div>
     <div class="form-group">
         <label for="bv_moTaNgan">Mô tả ngắn</label>
-        <textarea id="bv_moTaNgan" class="form-control ckeditor" rows="3"></textarea>
+        <input type="text" id="bv_moTaNgan" class="form-control"></input>
     </div>
     <div class="form-group">
+    <label>Hình ảnh</label>
         <div class="file-loading">
-            <label>Hình ảnh</label>
+            
             <input id="bv_hinh" type="file" name="bv_hinh">
         </div>
     </div>

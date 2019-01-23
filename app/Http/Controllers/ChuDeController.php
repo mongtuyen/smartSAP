@@ -16,7 +16,8 @@ class ChuDeController extends Controller
      */
     public function index()
     {
-        $ds_chude = DB::table('chude')->get();
+        $ds_chude = Chude::paginate(5); 
+        //$ds_chude = DB::table('chude')->get();
         
         return view('chude.index')
             ->with('danhsachchude', $ds_chude);
@@ -89,7 +90,7 @@ class ChuDeController extends Controller
     {
         $chude = Chude::where("cd_ma", $id)->first();
         $chude->cd_ten = $request->cd_ten;
-      
+        $chude->lv_ma=$request->lv_ma;
         $chude->save();
 
         Session::flash('alert-info', 'Cập nhật thành công!');

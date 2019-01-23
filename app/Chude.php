@@ -11,7 +11,7 @@ class Chude extends Model
     protected $fillable     = ['cd_ten','lv_ma'];
     protected $guarded      = ['cd_ma'];
     protected $primaryKey   = 'cd_ma';
-    public function khung()
+    public function linhvuc()
     {
         return $this->belongsTo('App\Linhvuc', 'lv_ma', 'lv_ma');
     }

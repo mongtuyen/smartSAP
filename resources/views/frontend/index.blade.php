@@ -13,6 +13,8 @@ Thời Đại Mới
     <h1>{{ __('smartsap.welcome') }}</h1>
 </div>
 
+<!-- Product -->
+
 @endsection
 {{-- Thay thế nội dung vào Placeholder `custom-scripts` của view `frontend.layouts.index` --}}
 @section('custom-scripts')
